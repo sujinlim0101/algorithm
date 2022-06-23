@@ -2,7 +2,6 @@ getShortestDistance(['5 2', '0 2 0 1 0', '1 0 1 0 0', '0 0 0 0 0', '2 0 0 1 1', 
 
 function getShortestDistance(input) {
   const [n, m] = input.shift().split(' ').map(Number);
-  const city = input.map((line) => line.split(' ').map(Number));
   console.log('city', city);
 
   const house = [];
@@ -17,8 +16,6 @@ function getShortestDistance(input) {
     }
   }
 
-  console.log('house', house);
-  console.log('chicken', chicken);
 
   const getMinDistance = () => {
     let sum = 0;
