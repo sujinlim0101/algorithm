@@ -21,4 +21,3 @@ function solution(n, computers) {
   return answer;
 }
 
-console.log('hello');
