@@ -4,7 +4,7 @@ result(['4 10 50', '10 100 20 90', '80 100 60 70', '70 20 30 40', '50 20 100 10'
 
 function result(input) {
   const [n, l, r] = input.shift().split(' ').map(Number);
-  const countries = Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
+  const countries = Array.from({ length: n }, () => Array.from({ length: n }, () => false));
 
   for (let i = 0; i < n; i++) {
     countries[i] = input.shift().split(' ').map(Number);
@@ -17,13 +17,15 @@ function result(input) {
 
   while (true) {
     let flag = false;
-    const visited = Array.from({ length: n }, () => Array.from({ length: n }, () => false));
+    const visited = Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
 
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
+    
         if (!visited[i][j]) {
+          // 초기화
           let queue = [[i, j]];
-          let visitedRecord = [[i, j]];
+          let visitedRecord = [[i, j]]; // 방문노드 누적
           let cnt = 1;
           let sumPopulation = countries[i][j];
           visited[i][j] = true;
@@ -31,8 +33,8 @@ function result(input) {
           while (queue.length) {
             // queue에 있는 원소 꺼내줌
             const [x, y] = queue.shift();
+             // 인접한 노드 모두 돌기
             for (let k = 0; k < 4; k++) {
-              // 인접한 노드 모두 돌기  
               const [nx, ny] = [x + dx[k], y + dy[k]];
 
               if (nx >= 0 && nx < n && ny >= 0 && ny < n) { // 배열을 벗어나지 않도록
@@ -40,7 +42,7 @@ function result(input) {
                 const diff = Math.abs(countries[x][y] - countries[nx][ny]); // 차이값
                 if (diff >= l && diff <= r && !visited[nx][ny]) { // 차이값이 조건에 부합하는지 && 방문한적이 없는지
                   visited[nx][ny] = true;
-                  // queue에 인접 노드 넣기    
+                  // queue에 조건에 부합하는 것 넣기
                   queue.push([nx, ny]);
                   visitedRecord.push([nx, ny]);
                   cnt++;
@@ -50,7 +52,7 @@ function result(input) {
               }
             }
           }
-          // 인접 노드 다 돔.
+          // queue가 비었음.
           const changePopulation = Math.floor(sumPopulation / cnt);
 
           for (const [x, y] of visitedRecord) {
