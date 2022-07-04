@@ -1,5 +1,5 @@
 // https://www.acmicpc.net/problem/14888 
- 
+
 const arrangeOperator = (input) => {
   const n = parseInt(input.shift());
   const numbers = input.shift().split(' ').map(Number);
