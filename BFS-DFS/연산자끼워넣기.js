@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/problem/14888
+// https://www.acmicpc.net/problem/14888 
  
 const arrangeOperator = (input) => {
   const n = parseInt(input.shift());
